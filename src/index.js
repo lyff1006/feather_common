@@ -211,7 +211,7 @@ class Common {
 
     //验证手机号码
     verifyPhone(phone){
-        let reg = /^[1][3,5,6,7,8]\d[9]/;
+        let reg = /^[1][3,5,6,7,8]\d{9}$/;
         return reg.test(phone)
     }
 
