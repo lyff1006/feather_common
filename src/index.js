@@ -209,6 +209,18 @@ class Common {
       
     }
 
+    //验证手机号码
+    verifyPhone(phone){
+        let reg = /^[1][3,5,6,7,8]\d[9]/;
+        return reg.test(phone)
+    }
+
+    //验证邮箱
+    verifyEmail(email){
+        let reg = /^[a-zA-Z0-9]+@[a-zA-z]+\.[\w]{2,3}$/
+        return reg.test(email)
+    }
+
 }
 const common = new Common();
 export { common }
