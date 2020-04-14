@@ -4,13 +4,20 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "./node_modules/.bin/rimraf lib",
+    "create": "./node_modules/.bin/babel src --out-dir lib",
+    "build": "npm run clean && npm run create"
   },
   "author": "smallfeather",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1"
+  },
+  "dependencies": {
+    "rimraf": "^3.0.2"
   }
 }
