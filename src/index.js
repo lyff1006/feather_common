@@ -1,6 +1,20 @@
+/*
+ * @description: 
+ * @author: 小羽
+ * @github: git@github.com:lyff1006/feather_common.git
+ * @lastEditors: 小羽
+ * @Date: 2020-03-28 23:38:34
+ * @LastEditTime: 2020-04-30 00:46:43
+ * @Copyright: 1.0.0
+ */
 
-
-// 防抖 (只执行最后一次点击)
+/**
+ * @description: 防抖 (只执行最后一次点击)
+ * @Date: 2020-04-30 00:36:31
+ * @author: 小羽
+ * @param fn:要进行防抖处理的方法，t:防抖的延迟时间
+ * @return: 
+ */
 export const Debounce = (fn, t) => {
     let delay = t || 500;
     let timer;
@@ -16,7 +30,13 @@ export const Debounce = (fn, t) => {
     }
 };
 
-//节流(先执行一次，过了t/1000秒后，有操作再执行执行第二次))
+/**
+ * @description: 节流(先执行一次，过了t/1000秒后，有操作再执行执行第二次))
+ * @Date: 2020-04-30 00:40:09
+ * @author: 小羽
+ * @param fn:要进行节流处理的方法，t:节流的延迟时间
+ * @return: 
+ */
 export const Throttle = (fn, t) => {
     let last;
     let timer;
@@ -37,7 +57,13 @@ export const Throttle = (fn, t) => {
     }
 };
 
-//柯里化函数
+/**
+ * @description: 柯里化函数
+ * @Date: 2020-04-30 00:41:45
+ * @author: 小羽
+ * @param {type} 
+ * @return: 
+ */
 export function curryingFunc(func, args = []) {
     let len = func.length;
     return function (..._args) {
@@ -50,7 +76,13 @@ export function curryingFunc(func, args = []) {
 }
 
 class Common {
-    //判断数据类型
+    /**
+     * @description: 判断数据类型
+     * @Date: 2020-04-30 00:42:17
+     * @author: 小羽
+     * @param {type} 
+     * @return: 数据类型（如boolean，number，string等）
+     */
     getType(obj) {
         let map = {
             '[object Boolean]': 'boolean',
@@ -67,7 +99,13 @@ class Common {
         return map[Object.prototype.toString.call(obj)];
     }
 
-    //判断文件类型
+    /**
+     * @description: 判断文件类型
+     * @Date: 2020-04-30 00:43:38
+     * @author: 小羽
+     * @param {type} 
+     * @return: 
+     */
     regFile(data, type = "image") {
         let fileTypes = [
             ".jpg",
@@ -95,7 +133,13 @@ class Common {
         }
     }
 
-    //深拷贝
+    /**
+     * @description: 深拷贝
+     * @Date: 2020-04-30 00:44:01
+     * @author: 小羽
+     * @param {type} 
+     * @return: 进行深拷贝后的data
+     */
     deepClone(data){
         let type = this.getType(data);
         let obj;
@@ -119,14 +163,26 @@ class Common {
         return obj;
     }
 
-    //获取url中的单个数据
+    /**
+     * @description: 获取url中的单个数据
+     * @Date: 2020-04-30 00:44:54
+     * @author: 小羽
+     * @param {type} 
+     * @return: 
+     */
     getUrlParam(name){
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
         if(r!=null)return decodeURI(r[2]); return null;
     }
 
-    //获取url中的所有数据
+    /**
+     * @description: 获取url中的所有数据
+     * @Date: 2020-04-30 00:45:11
+     * @author: 小羽
+     * @param {type} 
+     * @return: 
+     */
     getUrlParams(){
         let url = window.location.search;  //url中?之后的部分
         url = url.substring(1);    //去掉?
@@ -144,12 +200,24 @@ class Common {
         return dataObj;
     }
 
-    //数组去重
+    /**
+     * @description: 数组去重
+     * @Date: 2020-04-30 00:45:19
+     * @author: 小羽
+     * @param {type} 
+     * @return: 
+     */
     uniqueArr(arr){
         return [...new Set(arr)]
     }
 
-    //快速排序
+    /**
+     * @description: 快速排序
+     * @Date: 2020-04-30 00:45:28
+     * @author: 小羽
+     * @param {type} 
+     * @return: 
+     */
     quickSort(arr){
         if(arr.length<=1){return arr}
         let pivotIndex = Math.floor(arr.length/2)
@@ -165,7 +233,13 @@ class Common {
         return [...quickSort(left),pivot,...quickSort(right)]
     }
 
-    //二分查找（非递归）
+    /**
+     * @description: 二分查找（非递归）
+     * @Date: 2020-04-30 00:45:39
+     * @author: 小羽
+     * @param {type} 
+     * @return: 
+     */
     binarySearch(arr, key) {
         var low = 0,
             high = arr.length - 1;
@@ -186,11 +260,14 @@ class Common {
 
 
     /**
-     * 二分查找（递归）
+     * @description: 二分查找（递归）
+     * @Date: 2020-04-30 00:45:57
+     * @author: 小羽
      * @param {*} arr 已排好的数组
      * @param {*} low 第一个值的索引
      * @param {*} high 最后一个值的索引
      * @param {*} key 想要查找的值
+     * @return: 
      */
     binary_search(arr,low,high,key){
         if (low > high) {
@@ -209,13 +286,25 @@ class Common {
       
     }
 
-    //验证手机号码
+    /**
+     * @description: 验证手机号码
+     * @Date: 2020-04-30 00:46:31
+     * @author: 小羽
+     * @param {type} 
+     * @return: 
+     */
     verifyPhone(phone){
         let reg = /^[1][3,5,6,7,8]\d{9}$/;
         return reg.test(phone)
     }
 
-    //验证邮箱
+    /**
+     * @description: 验证邮箱
+     * @Date: 2020-04-30 00:46:41
+     * @author: 小羽
+     * @param {type} 
+     * @return: 
+     */
     verifyEmail(email){
         let reg = /^[a-zA-Z0-9]+@[a-zA-z]+\.[\w]{2,3}$/
         return reg.test(email)
