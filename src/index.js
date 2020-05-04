@@ -1,10 +1,10 @@
 /*
  * @description: 
  * @author: 小羽
- * @github: git@github.com:lyff1006/feather_common.git
+ * @github: https://github.com/lyff1006
  * @lastEditors: 小羽
  * @Date: 2020-03-28 23:38:34
- * @LastEditTime: 2020-04-30 00:46:43
+ * @LastEditTime: 2020-05-04 23:08:30
  * @Copyright: 1.0.0
  */
 
@@ -234,6 +234,19 @@ class Common {
     }
 
     /**
+     * @description: 数组合并
+     * @Date: 2020-05-04 22:47:14
+     * @author: 小羽
+     * @param {type} 
+     * arr1 合并的数组1
+     * arr2 合并的数组2
+     * @return: 
+     */
+    arrConcat(arr1,arr2){
+        return [...arr1,...arr2]
+    }
+
+    /**
      * @description: 二分查找（非递归）
      * @Date: 2020-04-30 00:45:39
      * @author: 小羽
@@ -291,6 +304,7 @@ class Common {
      * @Date: 2020-04-30 00:46:31
      * @author: 小羽
      * @param {type} 
+     * phone 手机号码
      * @return: 
      */
     verifyPhone(phone){
@@ -303,11 +317,92 @@ class Common {
      * @Date: 2020-04-30 00:46:41
      * @author: 小羽
      * @param {type} 
+     * email 邮箱账号
      * @return: 
      */
     verifyEmail(email){
         let reg = /^[a-zA-Z0-9]+@[a-zA-z]+\.[\w]{2,3}$/
         return reg.test(email)
+    }
+
+    /**
+     * @description: 千分位格式化
+     * @Date: 2020-05-04 22:41:44
+     * @author: 小羽
+     * @param {type} 
+     * num 格式化的数字
+     * decimal 是否保留小数，默认保留
+     * @return: 
+     */    
+    formatNum(num,decimal=false){
+        if(!num) return num
+        if(decimal){
+            return num.toFixed(0).replace(/\d{1,3}(?=(\d{3})+(\.|$))/g,'$&,');
+        }else{
+            return num.toFixed(2).replace(/\d{1,3}(?=(\d{3})+(\.|$))/g,'$&,');
+        }
+    }
+
+    /**
+     * @description: json对象数组，根据key值去重
+     * @Date: 2020-05-04 22:55:38
+     * @author: 小羽
+     * @param {type} 
+     * arr json对象数组
+     * key json对象的健值，根据该健值进行去重
+     * @return: 
+     */
+    uniqueJsonArr(arr,key){
+        let newObj = []
+        for(let item of arr){
+            let tag = true
+            for(let item1 of newObj){
+                if(item[key]==item1[key]){
+                    tag = false
+                }
+            } 
+            if(tag){
+                newObj.push(item)
+            }
+        }
+        return newObj
+    }
+
+    /**
+     * @description: json对象数组，根据key值排序
+     * @Date: 2020-05-04 23:06:18
+     * @author: 小羽
+     * @param {type} 
+     * arr json对象数组
+     * key json对象的健值，根据该值进行去重
+     * type 排序方式，默认为asc，即升序
+     * @return: 
+     */
+    sortJsonArr(arr,key,type="asc"){
+        let newArr = this.deepClone(arr)
+        if(type ==="desc"){
+            for(let item of newArr){
+                for(let item1 of newArr){
+                    if(item[key]<item1[key]){
+                        let newObj = this.deepClone(item[key])
+                        item[key] = this.deepClone(item1[key])
+                        item1[key] = newObj
+                    }
+                }
+            }
+        }else{
+            for(let item of newArr){
+                for(let item1 of newArr){
+                    if(item[key]>item1[key]){
+                        let newObj = this.deepClone(item[key])
+                        item[key] = this.deepClone(item1[key])
+                        item1[key] = newObj
+                    }
+                }
+            }
+        }
+        return newArr
+        
     }
 
 }
